@@ -1,13 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DemoService } from './demo.service';
 import { CreateDemoDto } from './dto/create-demo.dto';
 import { UpdateDemoDto } from './dto/update-demo.dto';
+import { ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import { Demo } from './entities/demo.entity';
 
 @Controller('demo')
 export class DemoController {
   constructor(private readonly demoService: DemoService) {}
 
   @Post()
+  @ApiCreatedResponse({
+    description: 'Created Succesfully',
+    type: Demo,
+    isArray: false,
+  })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
   create(@Body() createDemoDto: CreateDemoDto) {
     return this.demoService.create(createDemoDto);
   }
