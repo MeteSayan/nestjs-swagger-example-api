@@ -10,7 +10,11 @@ import {
 import { DemoService } from './demo.service';
 import { CreateDemoDto } from './dto/create-demo.dto';
 import { UpdateDemoDto } from './dto/update-demo.dto';
-import { ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 import { Demo } from './entities/demo.entity';
 
 @Controller('demo')
@@ -29,6 +33,10 @@ export class DemoController {
   }
 
   @Get()
+  @ApiOkResponse({
+    type: Demo,
+    isArray: true,
+  })
   findAll() {
     return this.demoService.findAll();
   }

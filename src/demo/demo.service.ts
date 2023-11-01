@@ -32,7 +32,7 @@ export class DemoService {
   }
 
   findAll() {
-    return `This action returns all demo`;
+    return this.usaStatesList;
   }
 
   findOne(id: number) {
