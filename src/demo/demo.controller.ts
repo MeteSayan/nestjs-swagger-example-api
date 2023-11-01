@@ -14,6 +14,7 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
   ApiOkResponse,
+  ApiNotFoundResponse,
 } from '@nestjs/swagger';
 import { Demo } from './entities/demo.entity';
 
@@ -42,6 +43,13 @@ export class DemoController {
   }
 
   @Get(':id')
+  @ApiOkResponse({
+    type: Demo,
+    isArray: false,
+  })
+  @ApiNotFoundResponse({
+    description: 'Not Found',
+  })
   findOne(@Param('id') id: string) {
     return this.demoService.findOne(+id);
   }

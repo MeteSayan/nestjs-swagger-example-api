@@ -36,7 +36,13 @@ export class DemoService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} demo`;
+    const usaState = this.usaStatesList.find((x) => x.id === id);
+
+    if (usaState) {
+      return usaState;
+    } else {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
   }
 
   update(id: number, updateDemoDto: UpdateDemoDto) {
