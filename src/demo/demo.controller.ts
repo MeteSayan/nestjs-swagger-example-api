@@ -55,6 +55,14 @@ export class DemoController {
   }
 
   @Patch(':id')
+  @ApiOkResponse({
+    type: Demo,
+    isArray: false,
+  })
+  @ApiNotFoundResponse({
+    description: 'Not Found',
+  })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
   update(@Param('id') id: string, @Body() updateDemoDto: UpdateDemoDto) {
     return this.demoService.update(+id, updateDemoDto);
   }

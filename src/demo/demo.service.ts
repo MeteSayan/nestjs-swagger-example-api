@@ -31,11 +31,11 @@ export class DemoService {
     }
   }
 
-  findAll() {
+  findAll(): Demo[] {
     return this.usaStatesList;
   }
 
-  findOne(id: number) {
+  findOne(id: number): Demo {
     const usaState = this.usaStatesList.find((x) => x.id === id);
 
     if (usaState) {
@@ -45,8 +45,16 @@ export class DemoService {
     }
   }
 
-  update(id: number, updateDemoDto: UpdateDemoDto) {
-    return `This action updates a #${id} demo`;
+  update(id: number, updateDemoDto: UpdateDemoDto): Demo {
+    const usaStateId = this.usaStatesList.findIndex((x) => x.id === id);
+
+    if (usaStateId != -1) {
+      this.usaStatesList[usaStateId].name = updateDemoDto.name;
+      this.usaStatesList[usaStateId].abbreviation = updateDemoDto.abbreviation;
+      return this.usaStatesList[usaStateId];
+    } else {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
   }
 
   remove(id: number) {
