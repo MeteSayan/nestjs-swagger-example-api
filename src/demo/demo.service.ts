@@ -12,6 +12,11 @@ export class DemoService {
     this.usaStatesList = usaStates;
   }
 
+  /* 
+  If the id is sent and unique, adds the new state it creates to the data.
+  If the id is not sent, it fills in automatically and adds the new state it creates to the data.
+  If the id is sent and already exists, it returns an error.
+  */
   create(createDemoDto: CreateDemoDto): CreateDemoDto {
     if (createDemoDto.id) {
       const isIdExist = this.usaStatesList.findIndex(
@@ -31,10 +36,15 @@ export class DemoService {
     }
   }
 
+  // Returning all data
   findAll(): Demo[] {
     return this.usaStatesList;
   }
 
+  /* 
+  It finds and returns data matching the given ID. 
+  If it cannot find it, it returns an error 
+  */
   findOne(id: number): Demo {
     const usaState = this.usaStatesList.find((x) => x.id === id);
 
@@ -45,6 +55,10 @@ export class DemoService {
     }
   }
 
+  /* 
+  It finds and updates data matching the given ID.
+  If it cannot find it, it returns an error 
+  */
   update(id: number, updateDemoDto: UpdateDemoDto): Demo {
     const usaStateId = this.usaStatesList.findIndex((x) => x.id === id);
 
@@ -57,6 +71,10 @@ export class DemoService {
     }
   }
 
+  /* 
+  It finds and remove data matching the given ID.
+  If it cannot find it, it returns an error
+  */
   remove(id: number) {
     const usaStateId = this.usaStatesList.findIndex((x) => x.id === id);
 
