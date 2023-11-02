@@ -26,6 +26,7 @@ export class DemoService {
     } else {
       createDemoDto.id =
         this.usaStatesList[this.usaStatesList.length - 1].id + 1;
+      this.usaStatesList.push(createDemoDto);
       return createDemoDto;
     }
   }
