@@ -18,7 +18,6 @@ export class DemoService {
         (x) => x.id === createDemoDto.id,
       );
       if (isIdExist != -1) {
-        console.log(isIdExist);
         throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
       } else {
         this.usaStatesList.push(createDemoDto);
@@ -58,6 +57,13 @@ export class DemoService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} demo`;
+    const usaStateId = this.usaStatesList.findIndex((x) => x.id === id);
+
+    if (usaStateId != -1) {
+      this.usaStatesList.splice(usaStateId, 1);
+      return true;
+    } else {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
   }
 }

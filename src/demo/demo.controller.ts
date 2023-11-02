@@ -68,6 +68,12 @@ export class DemoController {
   }
 
   @Delete(':id')
+  @ApiOkResponse({
+    description: 'Deleted Successfully',
+  })
+  @ApiNotFoundResponse({
+    description: 'Not Found',
+  })
   remove(@Param('id') id: string) {
     return this.demoService.remove(+id);
   }
