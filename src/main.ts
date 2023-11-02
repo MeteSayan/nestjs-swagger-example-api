@@ -15,8 +15,8 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Nest-js E-commerce API')
-    .setDescription('E-commerce API description')
+    .setTitle('Nest-js Swagger Example API')
+    .setDescription('Swagger Example API API description')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
